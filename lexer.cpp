@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <string>
 #include <unordered_map>
@@ -68,7 +69,7 @@ void processToken(const std::string& input) {
             automaton.validate(token.substr(0, token.size() - 1));
             std::cout << "Token: " << token.substr(0, token.size() - 1) << " Type: " << currentState->getName() << std::endl;
 
-            // Procesar el nuevo token
+            // Process new token
             token = std::string(1, c);
             currentState = start->getNextState(token);
 
@@ -86,17 +87,28 @@ void processToken(const std::string& input) {
     }
 }
 
-int main() {
-    std::string input;
-    std::cout << "Ingrese la expresión: ";
-    std::getline(std::cin, input);
-
-    try {
-        processToken(input);
-    } catch (const std::runtime_error& e) {
-        std::cerr << e.what() << std::endl;
-        return 1; //end execution if an invalid token is detected
+void lexer(const std::string& filepath) {
+    std::ifstream inputFile(filepath);
+    if (!inputFile) {
+        std::cerr << "Error: No se pudo abrir el archivo " << filepath << std::endl;
+        return;
     }
 
+    std::string line;
+    while (std::getline(inputFile, line)) {
+        try {
+            processToken(line);
+        } catch (const std::runtime_error& e) {
+            std::cerr << e.what() << std::endl;
+            return;
+        }
+    }
+
+    inputFile.close();
+}
+
+int main() {
+    std::string filepath = "expressions.txt";
+    lexer(filepath);
     return 0;
 }
