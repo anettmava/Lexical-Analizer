@@ -43,7 +43,7 @@ This file contains the main logic for the lexical analyzer. It includes the foll
 
 - `void processToken(const std::string& input)`: Processes a given input string and prints the tokens and their types.
 - `void lexer(const std::string& filepath)`: Reads a file line by line and processes each line using `processToken`.
-- `int main()`: The entry point of the program. It calls the `lexer` function with the path to the input file.
+- `int main()`: The main function of the program. It calls the `lexer` function with the path to the input file.
 
 ## How to Run the Program
 
