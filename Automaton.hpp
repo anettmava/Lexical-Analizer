@@ -1,6 +1,6 @@
 #include <string>
 #include <stdexcept>
-#include <State.hpp>
+#include "State.hpp"
 
 class Automaton {
     public:
@@ -30,7 +30,7 @@ class Automaton {
                         throw std::runtime_error("Error: Not a valid symbol");
                     }
                     else{
-                        std::cout<<"Token: "<<symbol<<"Type: "<<currentState->name<<std::endl;
+                        std::cout<<"Token: "<<symbol<<" Type: "<<currentState->name<<std::endl;
                     }
 
                     result = currentState->isFinal;
