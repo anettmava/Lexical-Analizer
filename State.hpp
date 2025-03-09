@@ -25,6 +25,10 @@ class State{
             }
             return nullptr;
         }
+
+        std::string getName(){
+            return name;
+        } 
         
         std::string toString() const {
             return name + "," + (isFinal ? "true" : "false") + "," + (isDeathState ? "true" : "false");
